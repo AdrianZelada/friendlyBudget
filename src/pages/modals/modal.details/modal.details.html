@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar color="dark">
+        <ion-title>
+            Detalles de Gasto
+        </ion-title>    
+        <ion-buttons end>
+            <button ion-button clear (click)="closed()">
+                <ion-icon name="md-exit"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list [formGroup]="formModalDetails">
+        <ion-item>
+            <ion-label color="primary" stacked>Nombre</ion-label>
+            <ion-input formControlName="description" type="text" placeholder="Nombre de Grupo de Gasto"></ion-input>
+        </ion-item>    
+        <ion-item>
+            <ion-label color="primary" stacked>Monto Sacado</ion-label>
+            <ion-input formControlName="amount" type="text" placeholder="Monto"></ion-input>
+        </ion-item>    
+        <ion-item>
+            <ion-label color="primary" stacked>Precio Real</ion-label>
+            <ion-input formControlName="priceItem" type="text" placeholder="Total de compra"></ion-input>
+        </ion-item>    
+        <ion-item>
+            <ion-label color="primary" stacked>Cambio</ion-label>
+            <ion-input formControlName="excess" type="text" placeholder="Excedente de la compra"></ion-input>
+        </ion-item>    
+        <ion-item>
+            <button ion-button (tap)="save()">Guardar</button>
+        </ion-item>
+    </ion-list>
+</ion-content>
+        

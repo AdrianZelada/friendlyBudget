@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar color="dark">
+        <ion-title>
+            Grupo de Gasto
+        </ion-title>    
+        <ion-buttons end>
+            <button ion-button clear (click)="closed()">
+                <ion-icon name="md-exit"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list [formGroup]="formModalExpenses">
+        <ion-item>
+            <ion-label color="primary" stacked>Nombre</ion-label>
+            <ion-input formControlName="name" type="text" placeholder="Nombre de Grupo de Gasto"></ion-input>
+        </ion-item>    
+        <ion-item>
+            <button ion-button (tap)="save()">Guardar</button>
+        </ion-item>
+    </ion-list>
+</ion-content>
+      

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      Actividades Monetarias
+    </ion-title>        
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-fab bottom right>
+    <button ion-fab (tap)="openModal()">
+        <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-list>
+    <ion-item *ngFor="let activity of activities" (tap)="openModal(activity)">
+      <ion-label>
+        {{activity.description}}
+      </ion-label>
+      <div item-content>
+        {{activity.amount}}
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

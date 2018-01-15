@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="primary">
+      <ion-title>
+        Area de Gastos
+      </ion-title>    
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-fab bottom right>
+  <button ion-fab (tap)="openModal()">
+      <ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>
+<ion-grid>
+  <ion-row align-items-center>
+    <ion-col col-4 *ngFor="let expense of expenses" (tap)="selectExpenses(expense)">
+      <ion-icon name="archive"></ion-icon>
+      <p>{{expense.name}}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

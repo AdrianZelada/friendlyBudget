@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar color="dark">
+        <ion-title>
+            Datos Periodo
+        </ion-title>    
+        <ion-buttons end>
+            <button ion-button clear (click)="closed()">
+                <ion-icon name="md-exit"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list [formGroup]="formModalCrudExpenses">
+        <ion-item>
+            <ion-label color="primary" stacked>Description</ion-label>
+            <ion-input formControlName="description" type="text" placeholder="Descripcion del Périodo"></ion-input>
+        </ion-item>    
+        <ion-item>
+            <ion-label color="primary" stacked>Monto Inital</ion-label>
+            <ion-input formControlName="amountInitial" type="text" placeholder="Monto"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" stacked>Termino???</ion-label>
+            <ion-toggle formControlName="status"></ion-toggle>            
+        </ion-item> 
+        <ion-item>
+            <button ion-button (tap)="save()">Guardar</button>
+        </ion-item>           
+    </ion-list>
+</ion-content>
+        
