@@ -1,9 +1,11 @@
 import { Component ,OnInit,OnDestroy} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,ActionSheetController } from 'ionic-angular';
 import { PeriodesService} from '../../providers/models/periodes';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { ModalPeriodes} from '../modals/modal.periodes/modal.periodes';
 import { MonetaryActivitiesPage} from '../monetary-activities/monetary-activities';
+import { ModalExpenses } from '../modals/modal.expenses/modal.expenses';
+import { ExpensesService } from '../../providers/models/expenses';
 
 
 @Component({
@@ -18,7 +20,9 @@ export class PeriodesPage implements OnInit,OnDestroy{
   constructor(
     private periodesService:PeriodesService,
     private navParams:NavParams,
+    private expensesService:ExpensesService,
     private navCtrl: NavController,
+    private actionSheetCtrl:ActionSheetController,
     private modalController:ModalController
   ) {
     console.log(navParams.get('data'));
@@ -27,7 +31,7 @@ export class PeriodesPage implements OnInit,OnDestroy{
 
   ngOnInit(){
     this.unsubscribe.push(this.periodesService.getDoc(this.groupExpenses.id).subscribe((data:any)=>{
-      // console.log(data)
+      console.log(data)
       // this.periodes=data;
     }));
 
@@ -50,15 +54,10 @@ export class PeriodesPage implements OnInit,OnDestroy{
       data:period || {}
     });
     modalExpenses.onDidDismiss((data:any)=>{
-      if(period){      
+      if(data.amountInitial){      
         let newPeriod = Object.assign(period,data); 
         console.log(newPeriod);
         this.periodesService.updateDocSubCollection(this.groupExpenses.id,"periodes",newPeriod);                                
-      }else{
-        // create
-        // this.periodes.periodes.push(data);
-        // this.periodesService.updateDoc(this.groupExpenses.id,this.periodes);        
-        this.periodesService.addDocSubCollection(this.groupExpenses.id,"periodes",data);                        
       }             
     });
     modalExpenses.present();
@@ -66,7 +65,43 @@ export class PeriodesPage implements OnInit,OnDestroy{
 
   goToActivities(period){
     this.navCtrl.push(MonetaryActivitiesPage,{
-      data:period
+      data:period,
+      groupId:this.groupExpenses.id
     });
+  }
+
+
+  openOptions(){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Opciones',
+      buttons: [
+        {
+          text: 'Editar',          
+          handler: () => {
+            console.log('Editar clicked');
+            let modalPeriod=this.modalController.create(ModalExpenses,{
+              data:this.groupExpenses
+            });
+            modalPeriod.onDidDismiss((data:any)=>{
+              console.log(data);
+              if(data.name){
+                let newPeriod = Object.assign(this.groupExpenses,data); 
+                this.expensesService.updateDoc(this.groupExpenses.id,newPeriod);                                
+              }              
+            });
+            modalPeriod.present();
+          }
+        },        
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+ 
+    actionSheet.present();
   }
 }

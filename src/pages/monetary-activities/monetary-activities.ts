@@ -1,8 +1,11 @@
 import { Component ,OnInit,OnDestroy} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,ActionSheetController } from 'ionic-angular';
 import { MonetaryActivitiesService} from '../../providers/models/monetary.activities';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { ModalDetails} from '../modals/modal.details/modal.details';
+import { ModalPeriodes} from '../modals/modal.periodes/modal.periodes';
+import { PeriodesService } from '../../providers/models/periodes';
+import { ExpensesService } from '../../providers/models/expenses';
 
 @Component({
   selector: 'page-monetary-activities',
@@ -13,20 +16,38 @@ export class MonetaryActivitiesPage implements OnInit,OnDestroy{
   activities:any;
   unsubscribe:Array<any>=[];
   period:any={};  
-  constructor(    
+  groupId:any;
+  entry:number=0;
+  egress:number=0;
+
+  constructor(  
+    private expensesService:ExpensesService,
+    private periodesService:PeriodesService,  
     private monetaryActivitiesService:MonetaryActivitiesService,
     private navParams:NavParams,
+    private actionSheetCtrl:ActionSheetController,
     private modalController:ModalController
   ) {
     console.log(navParams.get('data'));
     this.period=navParams.get('data');
+    this.groupId=navParams.get('groupId');
+    
   }
 
   ngOnInit(){
     
     this.monetaryActivitiesService.getSubCollection(this.period.id,'activities').subscribe((data:any)=>{
       console.log(data)
-      this.activities=data;
+      this.entry=0;
+      this.egress=0;
+      this.activities=data.reverse();
+      this.activities.forEach((activity:any)=>{
+        if(activity.statusActivity){
+          this.entry = this.entry + parseInt(activity.amount);
+        }else{
+          this.egress = this.egress + parseInt(activity.amount);
+        }            
+      });
     });
   }
 
@@ -58,5 +79,39 @@ export class MonetaryActivitiesPage implements OnInit,OnDestroy{
       }             
     });
     modalExpenses.present();
+  }
+
+  openOptions(){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Opciones',
+      buttons: [
+        {
+          text: 'Editar',          
+          handler: () => {
+            console.log('Editar clicked');
+            let modalPeriod=this.modalController.create(ModalPeriodes,{
+              data:this.period
+            });
+            modalPeriod.onDidDismiss((data:any)=>{
+              console.log(data);
+              if(data.amountInitial){
+                let newPeriod = Object.assign(this.period,data); 
+                this.periodesService.updateDocSubCollection(this.groupId,'periodes',newPeriod);                                
+              }              
+            });
+            modalPeriod.present();
+          }
+        },        
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+ 
+    actionSheet.present();
   }
 }

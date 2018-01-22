@@ -14,8 +14,15 @@
 <ion-content padding>
     <ion-list [formGroup]="formModalDetails">
         <ion-item>
-            <ion-label color="primary" stacked>Nombre</ion-label>
-            <ion-input formControlName="description" type="text" placeholder="Nombre de Grupo de Gasto"></ion-input>
+            <ion-label color="primary" stacked>Descripcion</ion-label>
+            <ion-input formControlName="description" type="text" placeholder="Descripcion de Gasto"></ion-input>
+        </ion-item>    
+        <ion-item>
+        <ion-label color="primary" stacked>Tipo de Actividad</ion-label>
+            <ion-select formControlName="statusActivity">
+                <ion-option value="true">Ingreso</ion-option>
+                <ion-option value="false">Egreso</ion-option>
+            </ion-select>            
         </ion-item>    
         <ion-item>
             <ion-label color="primary" stacked>Monto Sacado</ion-label>
@@ -28,7 +35,7 @@
         <ion-item>
             <ion-label color="primary" stacked>Cambio</ion-label>
             <ion-input formControlName="excess" type="text" placeholder="Excedente de la compra"></ion-input>
-        </ion-item>    
+        </ion-item>                    
         <ion-item>
             <button ion-button (tap)="save()">Guardar</button>
         </ion-item>

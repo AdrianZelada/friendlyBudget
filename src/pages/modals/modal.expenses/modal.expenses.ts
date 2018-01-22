@@ -7,9 +7,11 @@ import { FormBuilder,FormControl,FormGroup} from '@angular/forms';
 })
 export class ModalExpenses {
     formModalExpenses:FormGroup;
+    expenses:any={};
     constructor(params: NavParams,private fb:FormBuilder,private viewController:ViewController) {
+        this.expenses = params.get('data')||{};
         this.formModalExpenses=this.fb.group({
-            name:new FormControl(''),
+            name:new FormControl(this.expenses.name || ''),
         })
     }
 
