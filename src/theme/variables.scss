@@ -45,6 +45,24 @@ $colors: (
 ion-title{
   padding:15px 0px 0px 0px !important;
 }
+.fc-basic-view .fc-body .fc-row {
+  min-height: 1.5em !important;
+  height: 35px !important;
+}
+
+.fc-day-grid-container{
+  height: auto !important;
+}
+
+.fc-header-toolbar{
+  margin-bottom: 5px !important; 
+  .fc-left{
+    h2{
+      font-size: 2rem !important;
+    }
+  }  
+}
+
 
 // App iOS Variables
 // --------------------------------------------------

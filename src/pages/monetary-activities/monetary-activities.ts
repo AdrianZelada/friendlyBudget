@@ -6,6 +6,7 @@ import { ModalDetails} from '../modals/modal.details/modal.details';
 import { ModalPeriodes} from '../modals/modal.periodes/modal.periodes';
 import { PeriodesService } from '../../providers/models/periodes';
 import { ExpensesService } from '../../providers/models/expenses';
+import { ListCalendarPage } from '../list-calendar/list-calendar';
 
 @Component({
   selector: 'page-monetary-activities',
@@ -26,7 +27,9 @@ export class MonetaryActivitiesPage implements OnInit,OnDestroy{
     private monetaryActivitiesService:MonetaryActivitiesService,
     private navParams:NavParams,
     private actionSheetCtrl:ActionSheetController,
-    private modalController:ModalController
+    private modalController:ModalController,
+    private navCtrl: NavController,
+
   ) {
     console.log(navParams.get('data'));
     this.period=navParams.get('data');
@@ -101,7 +104,15 @@ export class MonetaryActivitiesPage implements OnInit,OnDestroy{
             });
             modalPeriod.present();
           }
-        },        
+        },  
+        {
+          text: 'Calendario',          
+          handler: () => {
+            this.navCtrl.push(ListCalendarPage,{
+              data:{}
+            }); 
+          }
+        },
         {
           text: 'Cancel',
           role: 'cancel',

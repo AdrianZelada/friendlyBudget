@@ -3,14 +3,16 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-//import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { GroupExpensesPage} from '../pages/group-expenses/group-expenses';
+import { GroupExpensesPage } from '../pages/group-expenses/group-expenses';
+import { ListCalendarPage } from '../pages/list-calendar/list-calendar';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+  // rootPage:any = ListCalendarPage;  
   rootPage:any = GroupExpensesPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {

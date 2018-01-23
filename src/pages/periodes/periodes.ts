@@ -54,10 +54,11 @@ export class PeriodesPage implements OnInit,OnDestroy{
       data:period || {}
     });
     modalExpenses.onDidDismiss((data:any)=>{
+      // debugger;
       if(data.amountInitial){      
-        let newPeriod = Object.assign(period,data); 
+        let newPeriod = Object.assign({},data); 
         console.log(newPeriod);
-        this.periodesService.updateDocSubCollection(this.groupExpenses.id,"periodes",newPeriod);                                
+        this.periodesService.addDocSubCollection(this.groupExpenses.id,"periodes",newPeriod);                                
       }             
     });
     modalExpenses.present();

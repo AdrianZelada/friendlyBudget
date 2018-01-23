@@ -4,10 +4,10 @@ import { Component } from '@angular/core';
 import { NavController, Content } from 'ionic-angular';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-list-calendar',
+  templateUrl: 'list-calendar.html'
 })
-export class HomePage {
+export class ListCalendarPage {
 
   @ViewChild(NgFullCalendarComponent) myCalendar: NgFullCalendarComponent;
   @ViewChild(Content) content: Content;
@@ -30,7 +30,17 @@ export class HomePage {
       slotLabelFormat: 'H',
       eventOverlap: false,
       displayEventTime: true,
-      events: []
+      events: [],
+      header:{
+        left:'title',
+        center:'',
+        right:'today prev,next'
+      },
+      buttonText:{
+        today:'Hoy'
+      },
+      monthNames:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+      dayNamesShort:['Lun','Mar','Mier','Jue','Vie','Sab','Dom']      
     };
   }
 

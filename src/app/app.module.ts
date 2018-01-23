@@ -31,6 +31,9 @@ import { ModalExpenses} from '../pages/modals/modal.expenses/modal.expenses';
 import { ModalPeriodes} from '../pages/modals/modal.periodes/modal.periodes';
 import { PopoverOptionsDetails} from '../pages/modals/popover.options/popover.options';
 
+import { NgFullCalendarComponent} from '../pages/fullcalendar/fullcalendar.component';
+import { ListCalendarPage} from '../pages/list-calendar/list-calendar';
+
 //Angular Firebase Module
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -55,7 +58,9 @@ import * as FConfig from './env';
     ModalDetails,
     ModalExpenses,
     ModalPeriodes,
-    PopoverOptionsDetails
+    PopoverOptionsDetails,
+    NgFullCalendarComponent,
+    ListCalendarPage
   ],
   imports: [
     BrowserModule,
@@ -81,7 +86,9 @@ import * as FConfig from './env';
     ModalDetails,
     ModalExpenses,
     ModalPeriodes,
-    PopoverOptionsDetails
+    PopoverOptionsDetails,
+    NgFullCalendarComponent,
+    ListCalendarPage
   ],
   providers: [
     StatusBar,
