@@ -18,8 +18,8 @@ export class MonetaryActivitiesPage implements OnInit,OnDestroy{
   unsubscribe:Array<any>=[];
   period:any={};  
   groupId:any;
-  entry:number=0;
-  egress:number=0;
+  entry:any=0;
+  egress:any=0;
 
   constructor(  
     private expensesService:ExpensesService,
@@ -46,9 +46,9 @@ export class MonetaryActivitiesPage implements OnInit,OnDestroy{
       this.activities=data.reverse();
       this.activities.forEach((activity:any)=>{
         if(activity.statusActivity){
-          this.entry = this.entry + parseInt(activity.amount);
+          this.entry = parseFloat(this.entry) + parseFloat(activity.amount);
         }else{
-          this.egress = this.egress + parseInt(activity.amount);
+          this.egress = parseFloat(this.egress) + parseFloat(activity.amount);
         }            
       });
     });

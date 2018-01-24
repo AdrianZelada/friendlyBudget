@@ -25,19 +25,19 @@
             </ion-select>            
         </ion-item>    
         <ion-item>
-            <ion-label color="primary" stacked>Monto Sacado</ion-label>
-            <ion-input formControlName="amount" type="text" placeholder="Monto"></ion-input>
-        </ion-item>    
+            <ion-label color="primary" stacked>Monto Sacado</ion-label>            
+            <ion-input formControlName="amount" type="text" placeholder="Monto" id="amount"></ion-input>            
+        </ion-item>                   
         <ion-item>
             <ion-label color="primary" stacked>Precio Real</ion-label>
             <ion-input formControlName="priceItem" type="text" placeholder="Total de compra"></ion-input>
         </ion-item>    
         <ion-item>
-            <ion-label color="primary" stacked>Cambio</ion-label>
-            <ion-input formControlName="excess" type="text" placeholder="Excedente de la compra"></ion-input>
+            <ion-label color="primary" stacked>Cambio : {{formModalDetails.controls.amount.value - formModalDetails.controls.priceItem.value}}</ion-label>
+            <!-- <ion-input formControlName="excess" type="text" placeholder="Excedente de la compra"></ion-input> -->
         </ion-item>                    
         <ion-item>
-            <button ion-button (tap)="save()">Guardar</button>
+            <button ion-button (tap)="save()" [disabled]="formModalDetails.invalid">Guardar</button>
         </ion-item>
     </ion-list>
 </ion-content>

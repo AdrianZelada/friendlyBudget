@@ -7,33 +7,42 @@ const firestore = admin.firestore();
 exports.createExpensesItem = functions
     .firestore.document('groupExpenses/{groupId}')
     .onCreate(event=>{
-        let date = new Date();
-        console.log(event);
-        console.log(event.data);
-        console.log(event.data.data());
-        console.log(event.params.groupId);
-        let documentRef = firestore.doc('periodes/'+event.params.groupId);
-        // let subcollection = documentRef.collection(event.params.groupId);
-        // let periodes = firestore.collection('periodes').doc();
-        // periodes.
-        // documentRef
-        documentRef.create({
-            id:event.params.groupId,
-            periodes:[]
-        })        
+        let date = new Date();            
         return event.data.ref.set({
-                createDate:date
-            },{ merge : true });
-    }); 
+            createDate:date
+        },{ merge : true });
+}); 
 
-// exports.createPeriod = functions
-    // .firestore.document('periodes/{periodId}')
-    // .onCreate(event=>{
-    //     let date = new Date();
-    //     return event.data.ref.set({
-    //             createDate:date
-    //         },{ merge : true });
-    // });    
+exports.createPeriod = functions
+    .firestore.document('periodes/{groupId}/periodes/{periodesId}')
+    .onCreate(event=>{
+        let date = new Date();
+        return event.data.ref.set({
+            createDate:date
+        },{ merge : true });
+});  
+
+exports.updatePeriod = functions
+    .firestore.document('periodes/{groupId}/periodes/{periodesId}')
+    .onUpdate(event=>{
+        let data = event.data.data();
+        let date = new Date();
+        if(data.status){
+            return event.data.ref.set({
+                endDate:date
+            },{ merge : true });
+        }
+        return event;
+});  
+
+exports.createActivities = functions
+    .firestore.document('monetaryActivities/{periodesId}/activities/{activityId}')
+    .onCreate(event=>{
+        let date = new Date();
+        return event.data.ref.set({
+            createDate:date
+        },{ merge : true });
+});
 
 // exports.updatePeriod = functions
 //     .firestore.document('periodes/{periodId}')
