@@ -13,7 +13,7 @@ import { LoadingProvider } from '../../providers/loading/loading';
 
 import { Facebook } from '@ionic-native/facebook';
 
-
+import { UsersService } from '../../providers/models/users';
 
 
 @IonicPage()
@@ -48,6 +48,7 @@ export class LoginPage {
 // For User Login
 
   userLogin(loginData){
+    
     this.loadingProvider.startLoading();
   	console.log('loginData',loginData);
   		this.afAuth.auth.signInWithEmailAndPassword(loginData.email, loginData.password)
@@ -73,6 +74,7 @@ export class LoginPage {
           this.loadingProvider.startLoading();
             firebase.auth().getRedirectResult().then((result)=>{
               console.log('result',result);
+              UsersService.setUser(result);
               this.moveToHome(result.user);
               this.loadingProvider.stopLoading();
             }).catch(function(error){

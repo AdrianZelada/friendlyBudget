@@ -22,7 +22,7 @@ export class GroupExpensesPage implements OnInit {
   }
 
   ngOnInit(){
-    this.expensesService.get().subscribe((data)=>{
+    this.expensesService.getGroup().subscribe((data)=>{
       console.log(data)
       this.expenses=data;
     });

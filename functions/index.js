@@ -9,8 +9,8 @@ exports.createExpensesItem = functions
     .onCreate(event=>{
         let date = new Date();  
         let data = event.data.data();       
-        if(data.createdFor){
-            let documentRef = firestore.doc('users/'+ data.uid+'/myExpenses/'+data.id);
+        if(data.uid){
+            let documentRef = firestore.doc('users/'+ data.uid+'/myExpenses/'+event.params.groupId);
             documentRef.create(data);
         }   
         return event.data.ref.set({
@@ -53,8 +53,10 @@ exports.authUser = functions
     .auth.user()
     .onCreate((event)=>{
         let user = event.data;
-        let documentRef = firestore.doc('users/'+ user.uid);        
-        documentRef.create(user);
+        // let documentRef = firestore.doc('users/'+ user.uid);        
+        // documentRef.create(user);
+        let documentRef = firestore.collection('users').doc(user.uid);
+        documentRef.create(user);        
     });
     
 // exports.updatePeriod = functions

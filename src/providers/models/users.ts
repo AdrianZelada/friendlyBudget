@@ -12,7 +12,7 @@ export class UsersService{
     static setUser(data:any){
         UsersService.user = data.additionalUserInfo.profile;
         UsersService.user.uid = data.user.uid;
-        localStorage.setItem('userExpenses',UsersService.user);
+        localStorage.setItem('userExpenses',JSON.stringify(UsersService.user));
         UsersService.$user.next(UsersService.user);
     }
 
