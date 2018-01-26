@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ionicFirebase</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+<widget id="zelada.presupuestos.torrez" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Presupuestos</name>
+    <description>Control de presupuestos</description>
+    <author email="zelada_torrez@hotmail.com" href="http://ionicframework.com/">Zelada Torrez Adrian Pedro</author>
     <universal-links>
-        <host name="https://zv3t4.app.goo.gl" scheme="https" />
-        <host name="fir-auth-bdcc0.firebaseapp.com" scheme="https">
+        <host name="https://ukg3p.app.goo.gl" scheme="https" />
+        <host name="expensecontrolz.firebaseapp.com" scheme="https">
             <path url="/__/auth/callback" />
         </host>
     </universal-links>

@@ -13,7 +13,9 @@ import { ListCalendarPage } from '../pages/list-calendar/list-calendar';
 })
 export class MyApp {
   // rootPage:any = ListCalendarPage;  
-  rootPage:any = GroupExpensesPage;
+  // rootPage:any = GroupExpensesPage;
+  rootPage:any = LoginPage;
+  
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

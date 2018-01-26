@@ -7,7 +7,12 @@ const firestore = admin.firestore();
 exports.createExpensesItem = functions
     .firestore.document('groupExpenses/{groupId}')
     .onCreate(event=>{
-        let date = new Date();            
+        let date = new Date();  
+        let data = event.data.data();       
+        if(data.createdFor){
+            let documentRef = firestore.doc('users/'+ data.uid+'/myExpenses/'+data.id);
+            documentRef.create(data);
+        }   
         return event.data.ref.set({
             createDate:date
         },{ merge : true });
@@ -44,6 +49,14 @@ exports.createActivities = functions
         },{ merge : true });
 });
 
+exports.authUser = functions
+    .auth.user()
+    .onCreate((event)=>{
+        let user = event.data;
+        let documentRef = firestore.doc('users/'+ user.uid);        
+        documentRef.create(user);
+    });
+    
 // exports.updatePeriod = functions
 //     .firestore.document('periodes/{periodId}')
 //     .onUpdate(event=>{

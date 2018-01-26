@@ -1,10 +1,25 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { FatherService} from './father.service';
-
-@Injectable()
-export class UsersService extends FatherService {        
-    constructor(db:AngularFirestore) {
-        super('users',db);
+import { Subject} from 'rxjs/Subject';
+declare let window:any;
+export class UsersService{        
+    static user : any = {};
+    static $user : Subject<any> = new Subject(); 
+    
+    static getUser(){
+        UsersService.user = JSON.parse(localStorage.getItem('userExpenses'));
+        return UsersService.user;
     }
+
+    static setUser(data:any){
+        UsersService.user = data.additionalUserInfo.profile;
+        UsersService.user.uid = data.user.uid;
+        localStorage.setItem('userExpenses',UsersService.user);
+        UsersService.$user.next(UsersService.user);
+    }
+
+    static logout(){
+        UsersService.user={};
+        localStorage.removeItem('userExpenses');
+        UsersService.$user.next(UsersService.user);
+    }
+
 }

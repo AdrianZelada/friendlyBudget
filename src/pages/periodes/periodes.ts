@@ -30,13 +30,7 @@ export class PeriodesPage implements OnInit,OnDestroy{
   }
 
   ngOnInit(){
-    this.unsubscribe.push(this.periodesService.getDoc(this.groupExpenses.id).subscribe((data:any)=>{
-      console.log(data)
-      // this.periodes=data;
-    }));
-
-
-    this.periodesService.getPeriodes(this.groupExpenses.id).subscribe((data:any)=>{
+    this.periodesService.getSubCollection(this.groupExpenses.id,'periodes').subscribe((data:any)=>{
       console.log(data)
       this.periodes=data;
     });

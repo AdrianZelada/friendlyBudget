@@ -4,13 +4,15 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
+import { GroupExpensesPage} from '../group-expenses/group-expenses';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import firebase from 'firebase';
 
 import { LoadingProvider } from '../../providers/loading/loading';
 
-import { Facebook } from '@ionic-native/facebook'
+import { Facebook } from '@ionic-native/facebook';
+
 
 
 
@@ -80,6 +82,7 @@ export class LoginPage {
             })
             this.loadingProvider.stopLoading();
         }).catch(function(error){
+          console.log(error);
           this.loadingProvider.stopLoading();
           alert(error.message);
           console.log('error',error);
@@ -129,8 +132,9 @@ export class LoginPage {
 
   //Move to Home Page
   moveToHome(res){
-  	console.log('res',res);
-  	this.navCtrl.setRoot(HomePage,{res:res});
+    console.log('res',res);
+    // this.navCtrl.setRoot(HomePage,{res:res});
+    this.navCtrl.setRoot(GroupExpensesPage,{res:res});      
   }
 
   presentToast(err) {
