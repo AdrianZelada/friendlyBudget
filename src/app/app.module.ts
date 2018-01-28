@@ -24,6 +24,7 @@ import { ExpensesUsersService} from '../providers/models/expenses.users';
 import { PeriodesService} from '../providers/models/periodes';
 import { UsersService} from '../providers/models/users';
 import { MonetaryActivitiesService } from '../providers/models/monetary.activities';
+import { UserServiceDB} from '../providers/models/user.service';
 
 
 import { ModalDetails} from '../pages/modals/modal.details/modal.details';
@@ -105,7 +106,8 @@ import * as FConfig from './env';
     ExpensesUsersService,
     UsersService,
     PeriodesService,
-    MonetaryActivitiesService
+    MonetaryActivitiesService,
+    UserServiceDB
     // FatherService
   ]
 })

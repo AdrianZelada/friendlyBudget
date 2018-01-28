@@ -15,17 +15,14 @@ export class FatherService {
         private db:AngularFirestore        
     ) {        
         this.model=schema;
-        this.collection = db.collection(this.model,ref => ref.where('uid', '==', UsersService.user.uid));
+        this.collection = db.collection(this.model);
     }
 
     get(){
         return this.collection.snapshotChanges().map((actions:any)=>{        
             return actions.map(a=>{          
               let data = a.payload.doc.data();
-              const id = a.payload.doc.id;
-              if(data.uid){
-                data.permission = data.uid == UsersService.getUser().uid; 
-              } 
+              const id = a.payload.doc.id;              
               return {id, ...data};
             });
           });
@@ -35,16 +32,13 @@ export class FatherService {
         return this.collection.doc(id).collection(collectionId).snapshotChanges().map((actions:any)=>{        
             return actions.map(a=>{          
               let data = a.payload.doc.data();
-              const id = a.payload.doc.id;
-              if(data.createdFor){
-                data.permission = data.createdFor.uid == UsersService.getUser().uid; 
-              }              
+              const id = a.payload.doc.id;                       
               return {id, ...data};
             });
           });
     }
 
-    getDoc(id:string){
+    getDoc(id:string){        
         return this.db.doc(`${this.model}/${id}`).valueChanges();
     }
 

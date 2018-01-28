@@ -3,6 +3,7 @@ import { NavController, NavParams,ModalController } from 'ionic-angular';
 import { ExpensesService } from '../../providers/models/expenses';
 import { PeriodesPage } from '../periodes/periodes';
 import { ModalExpenses } from '../modals/modal.expenses/modal.expenses';
+import { UserServiceDB} from '../../providers/models/user.service';
 
 @Component({
   selector: 'page-group-expenses',
@@ -16,6 +17,7 @@ export class GroupExpensesPage implements OnInit {
   constructor( 
     private expensesService:ExpensesService,
     private navCtrl:NavController,
+    private userServiceDB:UserServiceDB,
     private modalController:ModalController
   ) {
   
@@ -26,6 +28,13 @@ export class GroupExpensesPage implements OnInit {
       console.log(data)
       this.expenses=data;
     });
+
+    // this.userServiceDB.getExpensesUser().subscribe((data)=>{
+    //   this.expenses=data;      
+    //   console.log(data);
+    // },(e)=>{
+    //   console.log(e);
+    // })
   }
 
   selectExpenses(expense:any){
